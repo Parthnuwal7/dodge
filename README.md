@@ -1,3 +1,12 @@
+---
+title: Dodge
+emoji: "🚀"
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+---
+
 # Dodge Graph Query Assistant
 
 Live Demo link: 
