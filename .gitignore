@@ -16,3 +16,32 @@ frontend/.env.local
 
 # Build outputs
 frontend/dist/
+
+# Dataset / local data
+sap-order-to-cash-dataset/
+backend/*.jsonl
+backend/*.csv
+backend/*.parquet
+
+# Python cache/test artifacts
+.pytest_cache/
+**/__pycache__/
+*.pyo
+*.pyd
+
+# Logs
+*.log
+
+# OS/Editor artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Notebook artifacts
+*.ipynb_checkpoints
+
+# Coverage artifacts
+.coverage
+coverage.xml
+htmlcov/
