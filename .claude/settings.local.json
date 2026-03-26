@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(head -2 /c/dev/dodge/sap-order-to-cash-dataset/sap-o2c-data/products/*.jsonl)",
+      "Bash(head -2 /c/dev/dodge/sap-order-to-cash-dataset/sap-o2c-data/business_partner_addresses/*.jsonl)",
+      "Bash(head -2 /c/dev/dodge/sap-order-to-cash-dataset/sap-o2c-data/sales_order_schedule_lines/*.jsonl)",
+      "Bash(head -2 /c/dev/dodge/sap-order-to-cash-dataset/sap-o2c-data/customer_sales_area_assignments/*.jsonl)",
+      "Bash(head -5 /c/dev/dodge/sap-order-to-cash-dataset/sap-o2c-data/products/*.jsonl)",
+      "Bash(head -3 /c/dev/dodge/sap-order-to-cash-dataset/sap-o2c-data/business_partners/*.jsonl)",
+      "Bash(head -2 /c/dev/dodge/sap-order-to-cash-dataset/sap-o2c-data/sales_order_headers/*.jsonl)",
+      "Bash(head -2 /c/dev/dodge/sap-order-to-cash-dataset/sap-o2c-data/billing_document_headers/*.jsonl)",
+      "Bash(head -2 /c/dev/dodge/sap-order-to-cash-dataset/sap-o2c-data/outbound_delivery_headers/*.jsonl)",
+      "Bash(head -2 /c/dev/dodge/sap-order-to-cash-dataset/sap-o2c-data/sales_order_items/*.jsonl)",
+      "Bash(head -2 /c/dev/dodge/sap-order-to-cash-dataset/sap-o2c-data/billing_document_items/*.jsonl)",
+      "Bash(head -2 /c/dev/dodge/sap-order-to-cash-dataset/sap-o2c-data/outbound_delivery_items/*.jsonl)",
+      "Bash(head -2 /c/dev/dodge/sap-order-to-cash-dataset/sap-o2c-data/plants/*.jsonl)",
+      "Bash(head -2 /c/dev/dodge/sap-order-to-cash-dataset/sap-o2c-data/product_descriptions/*.jsonl)",
+      "Bash(head -2 /c/dev/dodge/sap-order-to-cash-dataset/sap-o2c-data/product_plants/*.jsonl)",
+      "Bash(head -2 /c/dev/dodge/sap-order-to-cash-dataset/sap-o2c-data/product_storage_locations/*.jsonl)",
+      "Bash(head -2 /c/dev/dodge/sap-order-to-cash-dataset/sap-o2c-data/customer_company_assignments/*.jsonl)",
+      "Bash(head -2 /c/dev/dodge/sap-order-to-cash-dataset/sap-o2c-data/billing_document_cancellations/*.jsonl)",
+      "Bash(head -2 /c/dev/dodge/sap-order-to-cash-dataset/sap-o2c-data/payments_accounts_receivable/*.jsonl)",
+      "Bash(head -2 /c/dev/dodge/sap-order-to-cash-dataset/sap-o2c-data/journal_entry_items_accounts_receivable/*.jsonl)",
+      "Bash(npx tsc:*)"
+    ]
+  }
+}

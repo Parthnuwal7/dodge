@@ -1,0 +1,252 @@
+{
+  "nodes": [
+    {
+      "label": "Customer",
+      "source_entity": "business_partners",
+      "properties": {
+        "businessPartner": "object",
+        "customer": "object",
+        "businessPartnerCategory": "object",
+        "businessPartnerFullName": "object",
+        "businessPartnerGrouping": "object",
+        "businessPartnerName": "object",
+        "correspondenceLanguage": "object",
+        "createdByUser": "object",
+        "creationDate": "object",
+        "creationTime": "object",
+        "firstName": "object",
+        "formOfAddress": "object",
+        "industry": "object",
+        "lastChangeDate": "object",
+        "lastName": "object",
+        "organizationBpName1": "object",
+        "organizationBpName2": "object",
+        "businessPartnerIsBlocked": "bool",
+        "isMarkedForArchiving": "bool"
+      },
+      "id_field": "businessPartner"
+    },
+    {
+      "label": "SalesOrder",
+      "source_entity": "sales_order_headers",
+      "properties": {
+        "salesOrder": "object",
+        "salesOrderType": "object",
+        "salesOrganization": "object",
+        "distributionChannel": "object",
+        "organizationDivision": "object",
+        "salesGroup": "object",
+        "salesOffice": "object",
+        "soldToParty": "object",
+        "creationDate": "object",
+        "createdByUser": "object",
+        "lastChangeDateTime": "object",
+        "totalNetAmount": "object",
+        "overallDeliveryStatus": "object",
+        "overallOrdReltdBillgStatus": "object",
+        "transactionCurrency": "object",
+        "requestedDeliveryDate": "object",
+        "customerPaymentTerms": "object"
+      },
+      "id_field": "salesOrder"
+    },
+    {
+      "label": "Product",
+      "source_entity": "products",
+      "properties": {
+        "product": "object",
+        "productOldId": "object",
+        "productType": "object",
+        "creationDate": "object",
+        "lastChangeDate": "object",
+        "isMarkedForDeletion": "bool",
+        "grossWeight": "object",
+        "weightUnit": "object",
+        "netWeight": "object",
+        "productGroup": "object",
+        "baseUnit": "object",
+        "division": "object",
+        "industrySector": "object"
+      },
+      "id_field": "product"
+    },
+    {
+      "label": "Plant",
+      "source_entity": "plants",
+      "properties": {
+        "plant": "object",
+        "plantName": "object",
+        "valuationArea": "object",
+        "factoryCalendar": "object",
+        "salesOrganization": "object",
+        "plantCategory": "object",
+        "language": "object"
+      },
+      "id_field": "plant"
+    },
+    {
+      "label": "Delivery",
+      "source_entity": "outbound_delivery_headers",
+      "properties": {
+        "deliveryDocument": "object",
+        "actualGoodsMovementDate": "object",
+        "creationDate": "object",
+        "deliveryBlockReason": "object",
+        "headerBillingBlockReason": "object",
+        "lastChangeDate": "object",
+        "overallGoodsMovementStatus": "object",
+        "overallPickingStatus": "object",
+        "shippingPoint": "object"
+      },
+      "id_field": "deliveryDocument"
+    },
+    {
+      "label": "Invoice",
+      "source_entity": "billing_document_headers",
+      "properties": {
+        "billingDocument": "object",
+        "billingDocumentType": "object",
+        "creationDate": "object",
+        "billingDocumentDate": "object",
+        "billingDocumentIsCancelled": "bool",
+        "cancelledBillingDocument": "object",
+        "totalNetAmount": "object",
+        "transactionCurrency": "object",
+        "companyCode": "object",
+        "fiscalYear": "object",
+        "accountingDocument": "object",
+        "soldToParty": "object"
+      },
+      "id_field": "billingDocument"
+    },
+    {
+      "label": "JournalEntry",
+      "source_entity": "journal_entry_items_accounts_receivable",
+      "properties": {
+        "companyCode": "object",
+        "fiscalYear": "object",
+        "accountingDocument": "object",
+        "accountingDocumentItem": "object",
+        "glAccount": "object",
+        "referenceDocument": "object",
+        "profitCenter": "object",
+        "transactionCurrency": "object",
+        "amountInTransactionCurrency": "object",
+        "postingDate": "object",
+        "documentDate": "object",
+        "accountingDocumentType": "object",
+        "customer": "object",
+        "financialAccountType": "object",
+        "clearingDate": "object",
+        "clearingAccountingDocument": "object"
+      },
+      "id_field": "accountingDocument"
+    },
+    {
+      "label": "Payment",
+      "source_entity": "payments_accounts_receivable",
+      "properties": {
+        "companyCode": "object",
+        "fiscalYear": "object",
+        "accountingDocument": "object",
+        "accountingDocumentItem": "object",
+        "clearingDate": "object",
+        "clearingAccountingDocument": "object",
+        "amountInTransactionCurrency": "object",
+        "transactionCurrency": "object",
+        "customer": "object",
+        "invoiceReference": "object",
+        "postingDate": "object",
+        "glAccount": "object",
+        "profitCenter": "object"
+      },
+      "id_field": "accountingDocument"
+    }
+  ],
+  "edges": [
+    {
+      "type": "PLACED_ORDER",
+      "from_node": "Customer",
+      "to_node": "SalesOrder",
+      "join_on": ["businessPartner", "soldToParty"]
+    },
+    {
+      "type": "BILLED_TO",
+      "from_node": "Invoice",
+      "to_node": "Customer",
+      "join_on": ["soldToParty", "businessPartner"]
+    },
+    {
+      "type": "GENERATES",
+      "from_node": "Invoice",
+      "to_node": "JournalEntry",
+      "join_on": ["accountingDocument", "accountingDocument"]
+    },
+    {
+      "type": "CLEARED_BY",
+      "from_node": "JournalEntry",
+      "to_node": "Payment",
+      "join_on": ["clearingAccountingDocument", "accountingDocument"]
+    },
+    {
+      "type": "PAID_BY",
+      "from_node": "Payment",
+      "to_node": "Customer",
+      "join_on": ["customer", "businessPartner"]
+    },
+    {
+      "type": "CONTAINS",
+      "from_node": "SalesOrder",
+      "to_node": "Product",
+      "join_on": ["salesOrder", "product"],
+      "source_entity": "sales_order_items",
+      "bridge_target_field": "material",
+      "rel_properties": ["salesOrderItem", "requestedQuantity", "requestedQuantityUnit", "netAmount", "materialGroup"]
+    },
+    {
+      "type": "PRODUCED_AT",
+      "from_node": "SalesOrder",
+      "to_node": "Plant",
+      "join_on": ["salesOrder", "plant"],
+      "source_entity": "sales_order_items",
+      "bridge_target_field": "productionPlant",
+      "rel_properties": ["storageLocation"]
+    },
+    {
+      "type": "FULFILLS",
+      "from_node": "Delivery",
+      "to_node": "SalesOrder",
+      "join_on": ["deliveryDocument", "salesOrder"],
+      "source_entity": "outbound_delivery_items",
+      "bridge_target_field": "referenceSdDocument",
+      "rel_properties": ["deliveryDocumentItem", "actualDeliveryQuantity", "deliveryQuantityUnit"]
+    },
+    {
+      "type": "SHIPS_FROM",
+      "from_node": "Delivery",
+      "to_node": "Plant",
+      "join_on": ["deliveryDocument", "plant"],
+      "source_entity": "outbound_delivery_items",
+      "bridge_target_field": "plant",
+      "rel_properties": ["storageLocation"]
+    },
+    {
+      "type": "INVOICES",
+      "from_node": "Invoice",
+      "to_node": "Product",
+      "join_on": ["billingDocument", "product"],
+      "source_entity": "billing_document_items",
+      "bridge_target_field": "material",
+      "rel_properties": ["billingDocumentItem", "billingQuantity", "billingQuantityUnit", "netAmount"]
+    },
+    {
+      "type": "BILLS",
+      "from_node": "Invoice",
+      "to_node": "Delivery",
+      "join_on": ["billingDocument", "deliveryDocument"],
+      "source_entity": "billing_document_items",
+      "bridge_target_field": "referenceSdDocument",
+      "rel_properties": ["billingDocumentItem"]
+    }
+  ]
+}

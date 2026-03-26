@@ -1,0 +1,56 @@
+{
+  "sales_order_items": [
+    {
+      "type": "CONTAINS",
+      "from_node": "SalesOrder",
+      "to_node": "Product",
+      "join_on": ["salesOrder", "product"],
+      "bridge_target_field": "material",
+      "rel_properties": ["salesOrderItem", "requestedQuantity", "requestedQuantityUnit", "netAmount", "materialGroup"]
+    },
+    {
+      "type": "PRODUCED_AT",
+      "from_node": "SalesOrder",
+      "to_node": "Plant",
+      "join_on": ["salesOrder", "plant"],
+      "bridge_target_field": "productionPlant",
+      "rel_properties": ["storageLocation"]
+    }
+  ],
+  "outbound_delivery_items": [
+    {
+      "type": "FULFILLS",
+      "from_node": "Delivery",
+      "to_node": "SalesOrder",
+      "join_on": ["deliveryDocument", "salesOrder"],
+      "bridge_target_field": "referenceSdDocument",
+      "rel_properties": ["deliveryDocumentItem", "actualDeliveryQuantity", "deliveryQuantityUnit"]
+    },
+    {
+      "type": "SHIPS_FROM",
+      "from_node": "Delivery",
+      "to_node": "Plant",
+      "join_on": ["deliveryDocument", "plant"],
+      "bridge_target_field": "plant",
+      "rel_properties": ["storageLocation"]
+    }
+  ],
+  "billing_document_items": [
+    {
+      "type": "INVOICES",
+      "from_node": "Invoice",
+      "to_node": "Product",
+      "join_on": ["billingDocument", "product"],
+      "bridge_target_field": "material",
+      "rel_properties": ["billingDocumentItem", "billingQuantity", "billingQuantityUnit", "netAmount"]
+    },
+    {
+      "type": "BILLS",
+      "from_node": "Invoice",
+      "to_node": "Delivery",
+      "join_on": ["billingDocument", "deliveryDocument"],
+      "bridge_target_field": "referenceSdDocument",
+      "rel_properties": ["billingDocumentItem"]
+    }
+  ]
+}

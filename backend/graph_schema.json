@@ -1,0 +1,928 @@
+{
+  "nodes": [
+    {
+      "label": "BillingDocumentCancellations",
+      "properties": {
+        "billingDocument": "object",
+        "billingDocumentType": "object",
+        "creationDate": "object",
+        "creationTime": "object",
+        "lastChangeDateTime": "object",
+        "billingDocumentDate": "object",
+        "billingDocumentIsCancelled": "bool",
+        "cancelledBillingDocument": "object",
+        "totalNetAmount": "object",
+        "transactionCurrency": "object",
+        "companyCode": "object",
+        "fiscalYear": "object",
+        "accountingDocument": "object",
+        "soldToParty": "object"
+      },
+      "id_field": "billingDocument"
+    },
+    {
+      "label": "BillingDocumentHeaders",
+      "properties": {
+        "billingDocument": "object",
+        "billingDocumentType": "object",
+        "creationDate": "object",
+        "creationTime": "object",
+        "lastChangeDateTime": "object",
+        "billingDocumentDate": "object",
+        "billingDocumentIsCancelled": "bool",
+        "cancelledBillingDocument": "object",
+        "totalNetAmount": "object",
+        "transactionCurrency": "object",
+        "companyCode": "object",
+        "fiscalYear": "object",
+        "accountingDocument": "object",
+        "soldToParty": "object"
+      },
+      "id_field": "billingDocument"
+    },
+    {
+      "label": "BillingDocumentItems",
+      "properties": {
+        "billingDocument": "object",
+        "billingDocumentItem": "object",
+        "material": "object",
+        "billingQuantity": "object",
+        "billingQuantityUnit": "object",
+        "netAmount": "object",
+        "transactionCurrency": "object",
+        "referenceSdDocument": "object",
+        "referenceSdDocumentItem": "object"
+      },
+      "id_field": "billingDocument"
+    },
+    {
+      "label": "BusinessPartnerAddresses",
+      "properties": {
+        "businessPartner": "object",
+        "addressId": "object",
+        "validityStartDate": "object",
+        "validityEndDate": "object",
+        "addressUuid": "object",
+        "addressTimeZone": "object",
+        "cityName": "object",
+        "country": "object",
+        "poBox": "object",
+        "poBoxDeviatingCityName": "object",
+        "poBoxDeviatingCountry": "object",
+        "poBoxDeviatingRegion": "object",
+        "poBoxIsWithoutNumber": "bool",
+        "poBoxLobbyName": "object",
+        "poBoxPostalCode": "object",
+        "postalCode": "object",
+        "region": "object",
+        "streetName": "object",
+        "taxJurisdiction": "object",
+        "transportZone": "object"
+      },
+      "id_field": "businessPartner"
+    },
+    {
+      "label": "BusinessPartners",
+      "properties": {
+        "businessPartner": "object",
+        "customer": "object",
+        "businessPartnerCategory": "object",
+        "businessPartnerFullName": "object",
+        "businessPartnerGrouping": "object",
+        "businessPartnerName": "object",
+        "correspondenceLanguage": "object",
+        "createdByUser": "object",
+        "creationDate": "object",
+        "creationTime": "object",
+        "firstName": "object",
+        "formOfAddress": "object",
+        "industry": "object",
+        "lastChangeDate": "object",
+        "lastName": "object",
+        "organizationBpName1": "object",
+        "organizationBpName2": "object",
+        "businessPartnerIsBlocked": "bool",
+        "isMarkedForArchiving": "bool"
+      },
+      "id_field": "businessPartner"
+    },
+    {
+      "label": "CustomerCompanyAssignments",
+      "properties": {
+        "customer": "object",
+        "companyCode": "object",
+        "accountingClerk": "object",
+        "accountingClerkFaxNumber": "object",
+        "accountingClerkInternetAddress": "object",
+        "accountingClerkPhoneNumber": "object",
+        "alternativePayerAccount": "object",
+        "paymentBlockingReason": "object",
+        "paymentMethodsList": "object",
+        "paymentTerms": "object",
+        "reconciliationAccount": "object",
+        "deletionIndicator": "bool",
+        "customerAccountGroup": "object"
+      },
+      "id_field": "customer"
+    },
+    {
+      "label": "CustomerSalesAreaAssignments",
+      "properties": {
+        "customer": "object",
+        "salesOrganization": "object",
+        "distributionChannel": "object",
+        "division": "object",
+        "billingIsBlockedForCustomer": "object",
+        "completeDeliveryIsDefined": "bool",
+        "creditControlArea": "object",
+        "currency": "object",
+        "customerPaymentTerms": "object",
+        "deliveryPriority": "object",
+        "incotermsClassification": "object",
+        "incotermsLocation1": "object",
+        "salesGroup": "object",
+        "salesOffice": "object",
+        "shippingCondition": "object",
+        "slsUnlmtdOvrdelivIsAllwd": "bool",
+        "supplyingPlant": "object",
+        "salesDistrict": "object",
+        "exchangeRateType": "object"
+      },
+      "id_field": "customer"
+    },
+    {
+      "label": "JournalEntryItemsAccountsReceivable",
+      "properties": {
+        "companyCode": "object",
+        "fiscalYear": "object",
+        "accountingDocument": "object",
+        "glAccount": "object",
+        "referenceDocument": "object",
+        "costCenter": "object",
+        "profitCenter": "object",
+        "transactionCurrency": "object",
+        "amountInTransactionCurrency": "object",
+        "companyCodeCurrency": "object",
+        "amountInCompanyCodeCurrency": "object",
+        "postingDate": "object",
+        "documentDate": "object",
+        "accountingDocumentType": "object",
+        "accountingDocumentItem": "object",
+        "assignmentReference": "object",
+        "lastChangeDateTime": "object",
+        "customer": "object",
+        "financialAccountType": "object",
+        "clearingDate": "object",
+        "clearingAccountingDocument": "object",
+        "clearingDocFiscalYear": "object"
+      },
+      "id_field": "accountingDocument"
+    },
+    {
+      "label": "OutboundDeliveryHeaders",
+      "properties": {
+        "actualGoodsMovementDate": "object",
+        "actualGoodsMovementTime": "object",
+        "creationDate": "object",
+        "creationTime": "object",
+        "deliveryBlockReason": "object",
+        "deliveryDocument": "object",
+        "hdrGeneralIncompletionStatus": "object",
+        "headerBillingBlockReason": "object",
+        "lastChangeDate": "object",
+        "overallGoodsMovementStatus": "object",
+        "overallPickingStatus": "object",
+        "overallProofOfDeliveryStatus": "object",
+        "shippingPoint": "object"
+      },
+      "id_field": "deliveryDocument"
+    },
+    {
+      "label": "OutboundDeliveryItems",
+      "properties": {
+        "actualDeliveryQuantity": "object",
+        "batch": "object",
+        "deliveryDocument": "object",
+        "deliveryDocumentItem": "object",
+        "deliveryQuantityUnit": "object",
+        "itemBillingBlockReason": "object",
+        "lastChangeDate": "object",
+        "plant": "object",
+        "referenceSdDocument": "object",
+        "referenceSdDocumentItem": "object",
+        "storageLocation": "object"
+      },
+      "id_field": "deliveryDocument"
+    },
+    {
+      "label": "PaymentsAccountsReceivable",
+      "properties": {
+        "companyCode": "object",
+        "fiscalYear": "object",
+        "accountingDocument": "object",
+        "accountingDocumentItem": "object",
+        "clearingDate": "object",
+        "clearingAccountingDocument": "object",
+        "clearingDocFiscalYear": "object",
+        "amountInTransactionCurrency": "object",
+        "transactionCurrency": "object",
+        "amountInCompanyCodeCurrency": "object",
+        "companyCodeCurrency": "object",
+        "customer": "object",
+        "invoiceReference": "object",
+        "invoiceReferenceFiscalYear": "object",
+        "salesDocument": "object",
+        "salesDocumentItem": "object",
+        "postingDate": "object",
+        "documentDate": "object",
+        "assignmentReference": "object",
+        "glAccount": "object",
+        "financialAccountType": "object",
+        "profitCenter": "object",
+        "costCenter": "object"
+      },
+      "id_field": "accountingDocument"
+    },
+    {
+      "label": "Plants",
+      "properties": {
+        "plant": "object",
+        "plantName": "object",
+        "valuationArea": "object",
+        "plantCustomer": "object",
+        "plantSupplier": "object",
+        "factoryCalendar": "object",
+        "defaultPurchasingOrganization": "object",
+        "salesOrganization": "object",
+        "addressId": "object",
+        "plantCategory": "object",
+        "distributionChannel": "object",
+        "division": "object",
+        "language": "object",
+        "isMarkedForArchiving": "bool"
+      },
+      "id_field": "plant"
+    },
+    {
+      "label": "ProductDescriptions",
+      "properties": {
+        "product": "object",
+        "language": "object",
+        "productDescription": "object"
+      },
+      "id_field": "product"
+    },
+    {
+      "label": "ProductPlants",
+      "properties": {
+        "product": "object",
+        "plant": "object",
+        "countryOfOrigin": "object",
+        "regionOfOrigin": "object",
+        "productionInvtryManagedLoc": "object",
+        "availabilityCheckType": "object",
+        "fiscalYearVariant": "object",
+        "profitCenter": "object",
+        "mrpType": "object"
+      },
+      "id_field": "plant"
+    },
+    {
+      "label": "ProductStorageLocations",
+      "properties": {
+        "product": "object",
+        "plant": "object",
+        "storageLocation": "object",
+        "physicalInventoryBlockInd": "object",
+        "dateOfLastPostedCntUnRstrcdStk": "object"
+      },
+      "id_field": "plant"
+    },
+    {
+      "label": "Products",
+      "properties": {
+        "product": "object",
+        "productType": "object",
+        "crossPlantStatus": "object",
+        "crossPlantStatusValidityDate": "object",
+        "creationDate": "object",
+        "createdByUser": "object",
+        "lastChangeDate": "object",
+        "lastChangeDateTime": "object",
+        "isMarkedForDeletion": "bool",
+        "productOldId": "object",
+        "grossWeight": "object",
+        "weightUnit": "object",
+        "netWeight": "object",
+        "productGroup": "object",
+        "baseUnit": "object",
+        "division": "object",
+        "industrySector": "object"
+      },
+      "id_field": "product"
+    },
+    {
+      "label": "SalesOrderHeaders",
+      "properties": {
+        "salesOrder": "object",
+        "salesOrderType": "object",
+        "salesOrganization": "object",
+        "distributionChannel": "object",
+        "organizationDivision": "object",
+        "salesGroup": "object",
+        "salesOffice": "object",
+        "soldToParty": "object",
+        "creationDate": "object",
+        "createdByUser": "object",
+        "lastChangeDateTime": "object",
+        "totalNetAmount": "object",
+        "overallDeliveryStatus": "object",
+        "overallOrdReltdBillgStatus": "object",
+        "overallSdDocReferenceStatus": "object",
+        "transactionCurrency": "object",
+        "pricingDate": "object",
+        "requestedDeliveryDate": "object",
+        "headerBillingBlockReason": "object",
+        "deliveryBlockReason": "object",
+        "incotermsClassification": "object",
+        "incotermsLocation1": "object",
+        "customerPaymentTerms": "object",
+        "totalCreditCheckStatus": "object"
+      },
+      "id_field": "salesOrder"
+    },
+    {
+      "label": "SalesOrderItems",
+      "properties": {
+        "salesOrder": "object",
+        "salesOrderItem": "object",
+        "salesOrderItemCategory": "object",
+        "material": "object",
+        "requestedQuantity": "object",
+        "requestedQuantityUnit": "object",
+        "transactionCurrency": "object",
+        "netAmount": "object",
+        "materialGroup": "object",
+        "productionPlant": "object",
+        "storageLocation": "object",
+        "salesDocumentRjcnReason": "object",
+        "itemBillingBlockReason": "object"
+      },
+      "id_field": "salesOrder"
+    },
+    {
+      "label": "SalesOrderScheduleLines",
+      "properties": {
+        "salesOrder": "object",
+        "salesOrderItem": "object",
+        "scheduleLine": "object",
+        "confirmedDeliveryDate": "object",
+        "orderQuantityUnit": "object",
+        "confdOrderQtyByMatlAvailCheck": "object"
+      },
+      "id_field": "salesOrder"
+    }
+  ],
+  "edges": [
+    {
+      "type": "HAS_BILLING_DOCUMENT",
+      "from_node": "BillingDocumentCancellations",
+      "to_node": "BillingDocumentHeaders",
+      "join_on": [
+        "billingDocument",
+        "billingDocument"
+      ]
+    },
+    {
+      "type": "HAS_BILLING_DOCUMENT",
+      "from_node": "BillingDocumentCancellations",
+      "to_node": "BillingDocumentHeaders",
+      "join_on": [
+        "billingDocument",
+        "cancelledBillingDocument"
+      ]
+    },
+    {
+      "type": "HAS_CANCELLED_BILLING_DOCUMENT",
+      "from_node": "BillingDocumentCancellations",
+      "to_node": "BillingDocumentHeaders",
+      "join_on": [
+        "cancelledBillingDocument",
+        "cancelledBillingDocument"
+      ]
+    },
+    {
+      "type": "HAS_ACCOUNTING_DOCUMENT",
+      "from_node": "BillingDocumentCancellations",
+      "to_node": "BillingDocumentHeaders",
+      "join_on": [
+        "accountingDocument",
+        "accountingDocument"
+      ]
+    },
+    {
+      "type": "HAS_BILLING_DOCUMENT",
+      "from_node": "BillingDocumentCancellations",
+      "to_node": "BillingDocumentItems",
+      "join_on": [
+        "billingDocument",
+        "billingDocument"
+      ]
+    },
+    {
+      "type": "HAS_CANCELLED_BILLING_DOCUMENT",
+      "from_node": "BillingDocumentCancellations",
+      "to_node": "JournalEntryItemsAccountsReceivable",
+      "join_on": [
+        "cancelledBillingDocument",
+        "clearingAccountingDocument"
+      ]
+    },
+    {
+      "type": "HAS_BILLING_DOCUMENT",
+      "from_node": "BillingDocumentHeaders",
+      "to_node": "BillingDocumentItems",
+      "join_on": [
+        "billingDocument",
+        "billingDocument"
+      ]
+    },
+    {
+      "type": "HAS_BILLING_DOCUMENT",
+      "from_node": "BillingDocumentHeaders",
+      "to_node": "JournalEntryItemsAccountsReceivable",
+      "join_on": [
+        "billingDocument",
+        "referenceDocument"
+      ]
+    },
+    {
+      "type": "HAS_ACCOUNTING_DOCUMENT",
+      "from_node": "BillingDocumentHeaders",
+      "to_node": "JournalEntryItemsAccountsReceivable",
+      "join_on": [
+        "accountingDocument",
+        "accountingDocument"
+      ]
+    },
+    {
+      "type": "HAS_ACCOUNTING_DOCUMENT",
+      "from_node": "BillingDocumentHeaders",
+      "to_node": "PaymentsAccountsReceivable",
+      "join_on": [
+        "accountingDocument",
+        "accountingDocument"
+      ]
+    },
+    {
+      "type": "HAS_ACCOUNTING_DOCUMENT",
+      "from_node": "BillingDocumentHeaders",
+      "to_node": "PaymentsAccountsReceivable",
+      "join_on": [
+        "accountingDocument",
+        "clearingAccountingDocument"
+      ]
+    },
+    {
+      "type": "HAS_BILLING_DOCUMENT",
+      "from_node": "BillingDocumentItems",
+      "to_node": "JournalEntryItemsAccountsReceivable",
+      "join_on": [
+        "billingDocument",
+        "referenceDocument"
+      ]
+    },
+    {
+      "type": "HAS_REFERENCE_SD_DOCUMENT",
+      "from_node": "BillingDocumentItems",
+      "to_node": "OutboundDeliveryHeaders",
+      "join_on": [
+        "referenceSdDocument",
+        "deliveryDocument"
+      ]
+    },
+    {
+      "type": "HAS_REFERENCE_SD_DOCUMENT",
+      "from_node": "BillingDocumentItems",
+      "to_node": "OutboundDeliveryItems",
+      "join_on": [
+        "referenceSdDocument",
+        "deliveryDocument"
+      ]
+    },
+    {
+      "type": "HAS_MATERIAL",
+      "from_node": "BillingDocumentItems",
+      "to_node": "SalesOrderItems",
+      "join_on": [
+        "material",
+        "material"
+      ]
+    },
+    {
+      "type": "HAS_BUSINESS_PARTNER",
+      "from_node": "BusinessPartnerAddresses",
+      "to_node": "BusinessPartners",
+      "join_on": [
+        "businessPartner",
+        "businessPartner"
+      ]
+    },
+    {
+      "type": "HAS_CUSTOMER",
+      "from_node": "BusinessPartners",
+      "to_node": "CustomerCompanyAssignments",
+      "join_on": [
+        "customer",
+        "customer"
+      ]
+    },
+    {
+      "type": "HAS_CUSTOMER",
+      "from_node": "BusinessPartners",
+      "to_node": "CustomerSalesAreaAssignments",
+      "join_on": [
+        "customer",
+        "customer"
+      ]
+    },
+    {
+      "type": "HAS_CUSTOMER",
+      "from_node": "BusinessPartners",
+      "to_node": "JournalEntryItemsAccountsReceivable",
+      "join_on": [
+        "customer",
+        "customer"
+      ]
+    },
+    {
+      "type": "HAS_CUSTOMER",
+      "from_node": "BusinessPartners",
+      "to_node": "PaymentsAccountsReceivable",
+      "join_on": [
+        "customer",
+        "customer"
+      ]
+    },
+    {
+      "type": "HAS_CUSTOMER",
+      "from_node": "CustomerCompanyAssignments",
+      "to_node": "CustomerSalesAreaAssignments",
+      "join_on": [
+        "customer",
+        "customer"
+      ]
+    },
+    {
+      "type": "HAS_CUSTOMER",
+      "from_node": "CustomerCompanyAssignments",
+      "to_node": "JournalEntryItemsAccountsReceivable",
+      "join_on": [
+        "customer",
+        "customer"
+      ]
+    },
+    {
+      "type": "HAS_CUSTOMER",
+      "from_node": "CustomerCompanyAssignments",
+      "to_node": "PaymentsAccountsReceivable",
+      "join_on": [
+        "customer",
+        "customer"
+      ]
+    },
+    {
+      "type": "HAS_CUSTOMER",
+      "from_node": "CustomerSalesAreaAssignments",
+      "to_node": "JournalEntryItemsAccountsReceivable",
+      "join_on": [
+        "customer",
+        "customer"
+      ]
+    },
+    {
+      "type": "HAS_CUSTOMER",
+      "from_node": "CustomerSalesAreaAssignments",
+      "to_node": "PaymentsAccountsReceivable",
+      "join_on": [
+        "customer",
+        "customer"
+      ]
+    },
+    {
+      "type": "HAS_SUPPLYING_PLANT",
+      "from_node": "CustomerSalesAreaAssignments",
+      "to_node": "Plants",
+      "join_on": [
+        "supplyingPlant",
+        "plantSupplier"
+      ]
+    },
+    {
+      "type": "HAS_ACCOUNTING_DOCUMENT",
+      "from_node": "JournalEntryItemsAccountsReceivable",
+      "to_node": "PaymentsAccountsReceivable",
+      "join_on": [
+        "accountingDocument",
+        "accountingDocument"
+      ]
+    },
+    {
+      "type": "HAS_CUSTOMER",
+      "from_node": "JournalEntryItemsAccountsReceivable",
+      "to_node": "PaymentsAccountsReceivable",
+      "join_on": [
+        "customer",
+        "customer"
+      ]
+    },
+    {
+      "type": "HAS_CLEARING_ACCOUNTING_DOCUMENT",
+      "from_node": "JournalEntryItemsAccountsReceivable",
+      "to_node": "PaymentsAccountsReceivable",
+      "join_on": [
+        "clearingAccountingDocument",
+        "clearingAccountingDocument"
+      ]
+    },
+    {
+      "type": "HAS_DELIVERY_DOCUMENT",
+      "from_node": "OutboundDeliveryHeaders",
+      "to_node": "OutboundDeliveryItems",
+      "join_on": [
+        "deliveryDocument",
+        "deliveryDocument"
+      ]
+    },
+    {
+      "type": "HAS_PLANT",
+      "from_node": "OutboundDeliveryItems",
+      "to_node": "Plants",
+      "join_on": [
+        "plant",
+        "plant"
+      ]
+    },
+    {
+      "type": "HAS_PLANT",
+      "from_node": "OutboundDeliveryItems",
+      "to_node": "Plants",
+      "join_on": [
+        "plant",
+        "plantCustomer"
+      ]
+    },
+    {
+      "type": "HAS_PLANT",
+      "from_node": "OutboundDeliveryItems",
+      "to_node": "Plants",
+      "join_on": [
+        "plant",
+        "plantSupplier"
+      ]
+    },
+    {
+      "type": "HAS_PLANT",
+      "from_node": "OutboundDeliveryItems",
+      "to_node": "ProductPlants",
+      "join_on": [
+        "plant",
+        "plant"
+      ]
+    },
+    {
+      "type": "HAS_PLANT",
+      "from_node": "OutboundDeliveryItems",
+      "to_node": "ProductStorageLocations",
+      "join_on": [
+        "plant",
+        "plant"
+      ]
+    },
+    {
+      "type": "HAS_PLANT",
+      "from_node": "OutboundDeliveryItems",
+      "to_node": "SalesOrderItems",
+      "join_on": [
+        "plant",
+        "productionPlant"
+      ]
+    },
+    {
+      "type": "HAS_PLANT",
+      "from_node": "Plants",
+      "to_node": "ProductPlants",
+      "join_on": [
+        "plant",
+        "plant"
+      ]
+    },
+    {
+      "type": "HAS_PLANT_CUSTOMER",
+      "from_node": "Plants",
+      "to_node": "ProductPlants",
+      "join_on": [
+        "plantCustomer",
+        "plant"
+      ]
+    },
+    {
+      "type": "HAS_PLANT",
+      "from_node": "Plants",
+      "to_node": "ProductStorageLocations",
+      "join_on": [
+        "plant",
+        "plant"
+      ]
+    },
+    {
+      "type": "HAS_PLANT_CUSTOMER",
+      "from_node": "Plants",
+      "to_node": "ProductStorageLocations",
+      "join_on": [
+        "plantCustomer",
+        "plant"
+      ]
+    },
+    {
+      "type": "HAS_PLANT",
+      "from_node": "Plants",
+      "to_node": "SalesOrderItems",
+      "join_on": [
+        "plant",
+        "productionPlant"
+      ]
+    },
+    {
+      "type": "HAS_PLANT_CUSTOMER",
+      "from_node": "Plants",
+      "to_node": "SalesOrderItems",
+      "join_on": [
+        "plantCustomer",
+        "productionPlant"
+      ]
+    },
+    {
+      "type": "HAS_PLANT_SUPPLIER",
+      "from_node": "Plants",
+      "to_node": "SalesOrderItems",
+      "join_on": [
+        "plantSupplier",
+        "productionPlant"
+      ]
+    },
+    {
+      "type": "HAS_PRODUCT",
+      "from_node": "ProductDescriptions",
+      "to_node": "Products",
+      "join_on": [
+        "product",
+        "product"
+      ]
+    },
+    {
+      "type": "HAS_PLANT",
+      "from_node": "ProductPlants",
+      "to_node": "ProductStorageLocations",
+      "join_on": [
+        "plant",
+        "plant"
+      ]
+    },
+    {
+      "type": "HAS_PLANT",
+      "from_node": "ProductPlants",
+      "to_node": "SalesOrderItems",
+      "join_on": [
+        "plant",
+        "productionPlant"
+      ]
+    },
+    {
+      "type": "HAS_PLANT",
+      "from_node": "ProductStorageLocations",
+      "to_node": "SalesOrderItems",
+      "join_on": [
+        "plant",
+        "productionPlant"
+      ]
+    },
+    {
+      "type": "HAS_SALES_ORDER",
+      "from_node": "SalesOrderHeaders",
+      "to_node": "SalesOrderItems",
+      "join_on": [
+        "salesOrder",
+        "salesOrder"
+      ]
+    },
+    {
+      "type": "HAS_SALES_ORDER",
+      "from_node": "SalesOrderHeaders",
+      "to_node": "SalesOrderScheduleLines",
+      "join_on": [
+        "salesOrder",
+        "salesOrder"
+      ]
+    },
+    {
+      "type": "HAS_SALES_ORDER",
+      "from_node": "SalesOrderItems",
+      "to_node": "SalesOrderScheduleLines",
+      "join_on": [
+        "salesOrder",
+        "salesOrder"
+      ]
+    },
+    {
+      "type": "HAS_CANCELLED_BILLING_DOCUMENT",
+      "from_node": "BillingDocumentHeaders",
+      "to_node": "BillingDocumentItems",
+      "join_on": [
+        "cancelledBillingDocument",
+        "billingDocument"
+      ]
+    },
+    {
+      "type": "HAS_ACCOUNTING_DOCUMENT",
+      "from_node": "BillingDocumentHeaders",
+      "to_node": "JournalEntryItemsAccountsReceivable",
+      "join_on": [
+        "accountingDocument",
+        "clearingAccountingDocument"
+      ]
+    },
+    {
+      "type": "HAS_PLANT_SUPPLIER",
+      "from_node": "Plants",
+      "to_node": "ProductPlants",
+      "join_on": [
+        "plantSupplier",
+        "plant"
+      ]
+    },
+    {
+      "type": "HAS_PLANT_SUPPLIER",
+      "from_node": "Plants",
+      "to_node": "ProductStorageLocations",
+      "join_on": [
+        "plantSupplier",
+        "plant"
+      ]
+    },
+    {
+      "type": "HAS_BILLING_DOCUMENT",
+      "from_node": "BillingDocumentCancellations",
+      "to_node": "JournalEntryItemsAccountsReceivable",
+      "join_on": [
+        "billingDocument",
+        "referenceDocument"
+      ]
+    },
+    {
+      "type": "HAS_ACCOUNTING_DOCUMENT",
+      "from_node": "BillingDocumentCancellations",
+      "to_node": "JournalEntryItemsAccountsReceivable",
+      "join_on": [
+        "accountingDocument",
+        "accountingDocument"
+      ]
+    },
+    {
+      "type": "HAS_ACCOUNTING_DOCUMENT",
+      "from_node": "BillingDocumentCancellations",
+      "to_node": "PaymentsAccountsReceivable",
+      "join_on": [
+        "accountingDocument",
+        "accountingDocument"
+      ]
+    },
+    {
+      "type": "HAS_CANCELLED_BILLING_DOCUMENT",
+      "from_node": "BillingDocumentHeaders",
+      "to_node": "JournalEntryItemsAccountsReceivable",
+      "join_on": [
+        "cancelledBillingDocument",
+        "referenceDocument"
+      ]
+    },
+    {
+      "type": "HAS_ACCOUNTING_DOCUMENT",
+      "from_node": "JournalEntryItemsAccountsReceivable",
+      "to_node": "PaymentsAccountsReceivable",
+      "join_on": [
+        "accountingDocument",
+        "clearingAccountingDocument"
+      ]
+    },
+    {
+      "type": "HAS_CLEARING_ACCOUNTING_DOCUMENT",
+      "from_node": "JournalEntryItemsAccountsReceivable",
+      "to_node": "PaymentsAccountsReceivable",
+      "join_on": [
+        "clearingAccountingDocument",
+        "accountingDocument"
+      ]
+    }
+  ]
+}
