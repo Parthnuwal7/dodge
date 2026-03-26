@@ -9,128 +9,188 @@ pinned: false
 
 # Dodge Graph Query Assistant
 
-Live Demo link: 
-Backend link: 
-Video link: https://youtu.be/7pkjkYFTdA0
+Live Demo link: https://dodge-six-dusky.vercel.app/
+Backend link: https://huggingface.co/spaces/parthnuwal7/dodge/tree/main?logs=container
+Video link: https://youtu.be/Lt7ARqYgfI8
 
 ## What This Project Does
-This project turns Order-to-Cash business data into a graph and lets users ask natural-language questions over that graph.
+This project turns SAP Order-to-Cash data into a queryable graph and provides a chat-style interface to ask business questions in plain English.
 
-- Backend: FastAPI + Neo4j + LLM routing
-- Frontend: React + Vite + Cytoscape visualization
-- Optional chat persistence: Supabase
+In practice, it does three jobs well:
+1. Build a graph model of the O2C process (Customer -> SalesOrder -> Delivery -> Invoice -> Payment).
+2. Convert natural language into safe, schema-aware Cypher.
+3. Return both tabular results and graph paths so answers are inspectable, not black-box.
 
-## Solution Approach
-We built the system in two connected flows:
+Core stack:
+- Backend: FastAPI, Neo4j, schema-guided LLM routing
+- Frontend: React + Vite + Cytoscape
+- Session persistence: Supabase (optional)
 
-1. Data flow (model the business process as a graph)
-2. Query flow (translate user questions into safe Cypher and return both table + path data)
+## Why This Design
+Order-to-Cash is process data, not just records. Most high-value questions are multi-hop and relationship-heavy.
 
-The design goal is to keep queries explainable, safe, and debuggable while still supporting flexible natural language.
+Examples:
+- Which billed deliveries for customer X have no payment yet?
+- Which plants are associated with delivered items in division 10?
+- Which chains break between order and invoice?
 
-## Architecture Decisions
+These are awkward in relational query UIs but natural in a graph model. That is why Neo4j is central to the system, and why the query pipeline emphasizes path correctness.
 
-### 1) Database Choice: Neo4j
-Neo4j was chosen because Order-to-Cash is inherently relationship-heavy (Customer -> SalesOrder -> Delivery -> Invoice -> Payment).
+## System Architecture
 
-Why Neo4j here:
-- Multi-hop process traversal is first-class
-- Relationship semantics are explicit and queryable
-- Path exploration and graph visualization map naturally to the domain
+```mermaid
+flowchart LR
+	U[User Query] --> FE[Frontend: React + Chat Panel]
+	FE --> API[/FastAPI: /api/v1/query/ask/]
 
-### 2) API Layer: FastAPI
-FastAPI provides typed request/response contracts, clear route separation, and fast iteration.
+	API --> GR[Guardrails]
+	GR --> IE[Intent Extractor]
+	IE --> TS[Template Selector]
+	TS -->|known intent| TG[Template Cypher Generator]
+	TS -->|complex intent| CG[Custom Cypher Generator]
 
-Key backend route groups:
-- Graph routes: schema preview/build/explore/status/neighbors
-- Query routes: ask question, chat status/history clear
+	TG --> QV[Query Validator + Corrective Rewrites]
+	CG --> QV
 
-### 3) Frontend Stack: React + Cytoscape
-The UI was designed around two views:
-- Full graph exploration
-- Query-result path view focused on relevant nodes/edges
+	QV --> NX[Neo4j Execution]
+	NX --> PE[Path Extractor]
+	PE --> RF[Response Formatter]
+	RF --> FE
 
-Cytoscape is used for interactive graph rendering and path highlighting.
+	FE --> SB[(Supabase Chat Logs)]
+```
 
-### 4) Chat Persistence: Supabase
-Supabase stores session-based query/response history so users can reload and continue context until they press Quit.
+## Data Flow (Ingestion Side)
+We treat ingestion as a schema-first process, not a blind import.
 
-## Data Processing Pipeline
+1. Load source entities from SAP O2C JSONL datasets.
+2. Infer/curate graph schema (`nodes`, `edges`, ID fields, relationship joins).
+3. Build normalized nodes and relationships in Neo4j.
+4. Persist schema artifacts for runtime query validation and prompting.
 
-### Ingestion/Modeling
-1. Read SAP O2C source files
-2. Infer/curate graph schema (labels, relationships, keys)
-3. Build nodes and relationships in Neo4j
-4. Expose graph status and explore endpoints
+Why this matters:
+- The same schema powers ingestion, prompt constraints, and runtime query validation.
+- This keeps generation and execution grounded to the actual graph shape.
 
-### Graph Schema as Control Plane
-The schema is not only for ingestion; it also controls query generation and validation.
-
-## Query Processing Pipeline
-For `/api/v1/query/ask`, the backend pipeline is:
+## Query Flow (Runtime)
+For `POST /api/v1/query/ask`, the backend pipeline is intentionally strict:
 
 1. Input guardrail
-2. Intent extraction (LLM)
-3. Domain guardrail
-4. Template selection (or custom Cypher generation)
-5. Parameter mapping
-6. Cypher generation
-7. Output guardrail
-8. Schema validation
-9. Neo4j execution
-10. Path extraction + response formatting
+2. Intent extraction
+3. Domain/entity guardrail
+4. Template route (deterministic) OR custom generation route
+5. Cypher validation + corrective rewrite pass
+6. Neo4j execution
+7. Path extraction for graph highlighting
+8. Response formatting (answer + explanation + cypher + rows + graph)
 
-Returned payload includes:
-- Natural-language answer
-- Explanation
-- Executed Cypher
-- Graph nodes/edges for visualization
-- Tabular data rows
-- Metadata (timing/counts/template/intent)
+### Response Contract
+Each answer returns:
+- `answer` (human-readable)
+- `explanation`
+- `query_used` (final Cypher)
+- `data` (tabular rows)
+- `nodes`/`edges` (graph visualization payload)
+- `metadata` (timing, intent, template, counts)
+
+This is deliberate: users can verify what the system executed, not just trust the summary.
+
+## Engineering Decisions and Tradeoffs
+
+### 1) Neo4j as Source of Truth
+We prioritized relationship traversal and path explainability over tabular convenience.
+
+Benefits:
+- Multi-hop traversal is concise and performant.
+- Relationship direction is explicit (critical for process correctness).
+- Native fit for path-based UI rendering.
+
+Tradeoff:
+- Requires strict schema/relationship governance to avoid drift.
+
+### 2) Hybrid Query Strategy (Template-first)
+We do not generate every query from scratch.
+
+- Common intents use deterministic templates.
+- Complex intents use custom LLM generation with schema and path constraints.
+
+Why:
+- Better reliability and lower variance for frequent asks.
+- Flexibility when a query does not fit predefined intent classes.
+
+### 3) FastAPI with Explicit Pipeline Boundaries
+Services are split by responsibility (`query_router`, `query_validator`, `execution_engine`, `response_formatter`) so failures are stage-identifiable.
+
+### 4) Explainability Over Minimal Payload
+We intentionally return Cypher + path graph + table rows in one response to make debugging and trust easier in enterprise workflows.
 
 ## LLM Prompting Strategy
-The system uses a hybrid strategy:
+Prompting is schema-anchored and path-aware.
 
-### Deterministic templates first
-For common intents (count, find node, ranking, etc.), predefined Cypher templates are preferred for stability.
+What we inject into prompts:
+- Canonical node labels and properties
+- Allowed relationship types and direction
+- Candidate traversal skeletons from schema path search
+- Identifier rules (primary keys, alternate IDs)
+- Read-only constraints and output format requirements
 
-### Custom generation when needed
-For complex user questions, prompts include:
-- Allowed node labels/properties
-- Allowed relationships and directions
-- Candidate traversal patterns
-- Identifier rules (primary keys and alternates)
-- Strict output format requirements
+This drastically reduces invalid relationship invention compared to unconstrained prompting.
 
-### Fallback model strategy
-Primary provider is called first; fallback provider is used on provider failure.
+## Guardrails and Validation
+The system uses layered protection before query execution:
 
-## Guardrails and Safety
-Guardrails are enforced before execution:
+- Input guardrails: reject prompt-injection style patterns.
+- Domain guardrails: check extracted entities against known graph schema.
+- Output guardrails: enforce read-only query behavior.
+- Schema validation: labels, relationships, directionality, malformed patterns.
 
-- Input guardrails: block prompt-injection patterns and unsafe content
-- Domain guardrails: ensure query entities map to known graph domain
-- Output guardrails: enforce read-only Cypher
-- Schema validator: validate labels, relationship types, direction, and malformed syntax
+Corrective rewrites are applied for common LLM mistakes (arrow syntax, invalid inline OR maps, EXISTS style fixes, path expressions in `WITH`).
 
-Additional corrective rewrites are applied for common LLM mistakes:
-- Arrow direction fixes
-- Invalid inline OR maps to WHERE clauses
-- EXISTS syntax normalization
-- Invalid path patterns in WITH moved to MATCH clauses
+When provider quotas are exhausted, the API surfaces a clear `429` (rate-limited) instead of opaque failures.
 
-Runtime protection:
-- Provider rate-limit errors are surfaced as HTTP 429
-- Query failures are logged with stage-aware diagnostics
+## Frontend Behavior
+The UI has two modes:
 
-## Session-Based Chat Behavior
-- A client session ID is generated and reused
-- On reload, history for the session is fetched from Supabase
-- On Quit, session history is cleared and a new session starts
+1. Full Graph
+2. Query Results (focused)
 
-## Deployment Layout
-Single repo, split deployment:
+Query mode prioritizes relevant nodes/edges from returned paths and supports edge-focused highlighting from the side panel.
+
+Chat behavior is session-based:
+- Session ID is persisted client-side.
+- History is restored from Supabase on reload.
+- Quit clears session history and rotates to a new session.
+
+## Deployment
+Single repository, split deployment:
+
 - Backend -> Hugging Face Space (Docker)
-- Frontend -> Vercel (root directory `frontend`)
+- Frontend -> Vercel (`frontend` root)
 
-Frontend uses `VITE_API_BASE_URL` for production backend URL wiring.
+Frontend points to backend using `VITE_API_BASE_URL`.
+
+## Repository Layout (Important Paths)
+- `backend/app/api/` - HTTP routes
+- `backend/app/services/` - orchestration services
+- `backend/app/query/` - routing, validation, execution, formatting
+- `backend/app/llm/` - intent extraction, prompt manager, template registry
+- `backend/templates/cypher/` - deterministic Cypher templates
+- `frontend/src/components/` - chat/graph panels
+- `frontend/src/api/client.ts` - frontend API adapter
+
+## Known Operational Constraints
+- LLM providers can rate-limit (OpenRouter/Groq). Fallback is supported, but both can exhaust quota.
+- Supabase chat logging requires service role key and existing `chat_logs` table.
+- Neo4j schema quality directly affects custom-query reliability.
+
+## Quick Start (Local)
+
+Backend:
+1. Set `backend/.env`
+2. Run `uvicorn app.main:app --reload --port 8000`
+
+Frontend:
+1. Set `frontend/.env` if needed (`VITE_API_BASE_URL`)
+2. Run `npm run dev` inside `frontend/`
+
+Then open the frontend and start with any business question from the examples.
