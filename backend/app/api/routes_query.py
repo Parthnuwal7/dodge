@@ -105,6 +105,16 @@ def _load_schema(schema_json: dict | None) -> GraphSchema:
     )
 
 
+def _is_rate_limited_error(exc: Exception) -> bool:
+    text = str(exc).lower()
+    return (
+        "rate limit" in text
+        or "rate_limit" in text
+        or "too many requests" in text
+        or "429" in text
+    )
+
+
 # ---------------------------------------------------------------------------
 # Endpoints
 # ---------------------------------------------------------------------------
@@ -169,6 +179,27 @@ def ask_question(request: AskRequest):
         })
     except Exception as e:
         logger.error("Query failed: %s", e)
+        if _is_rate_limited_error(e):
+            chat_logger.log(
+                session_id=request.session_id,
+                question=request.question,
+                answer="",
+                explanation="",
+                query_used="",
+                metadata={},
+                node_count=0,
+                edge_count=0,
+                record_count=0,
+                status="rate_limited",
+                error=str(e),
+            )
+            raise HTTPException(
+                status_code=429,
+                detail=(
+                    "LLM rate limit exceeded. Please retry in a few minutes, "
+                    "or switch to a higher-quota model/provider."
+                ),
+            )
         chat_logger.log(
             session_id=request.session_id,
             question=request.question,
